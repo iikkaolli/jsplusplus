@@ -1,18 +1,30 @@
-
 #include "value.hpp"
+#include "null_value.hpp"
 
 namespace js
 {
-  bool value::is_object() const
+  value_c::value_c() : m_pImpl(new value_base_s{}){}
+  value_c::~value_c(){}
+
+  bool value_c::is_object() const
+  {
+    return m_pImpl->is_object();
+  }
+  bool value_c::is_number() const
+  {
+    return m_pImpl->is_number();
+  }
+  bool value_c::is_string() const
+  {
+    return m_pImpl->is_string();
+  }
+
+  bool operator==(const value_c& lhs, std::nullptr_t rhs)
   {
     return true;
   }
-  bool value::is_number() const
+  bool operator==(std::nullptr_t lhs, const value_c& rhs)
   {
-    return false;
-  }
-  bool value::is_string() const
-  {
-    return false;
+    return true;
   }
 }

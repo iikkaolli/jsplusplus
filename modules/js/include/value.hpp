@@ -1,13 +1,27 @@
+#pragma once
+#include <memory>
 
 namespace js
 {
   
-class value
+class value_c
 {
 public:
-  virtual bool is_object() const;
-  virtual bool is_number() const;
-  virtual bool is_string() const;
+  struct value_base_s;
+  
+  value_c();
+  ~value_c();
+
+  friend bool operator==(const value_c&, std::nullptr_t);
+  friend bool operator==(std::nullptr_t, const value_c&);
+  
+  bool is_object() const;
+  bool is_number() const;
+  bool is_string() const;
+
+private:
+  std::unique_ptr<value_base_s> m_pImpl;
+
 };
 
 }
