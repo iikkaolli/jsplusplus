@@ -14,6 +14,7 @@ namespace js
 
     virtual bool equals(std::nullptr_t) const { return false; }
     virtual bool equals(int) const { return false; }
+    virtual bool equals(double) const { return false; }
     
     virtual bool is_object() const { return false; }
     virtual bool is_number() const { return false; }
