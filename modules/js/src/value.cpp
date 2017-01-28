@@ -1,5 +1,6 @@
 #include "value.hpp"
 #include "null_value.hpp"
+#include "int_value.hpp"
 
 namespace js
 {
@@ -20,6 +21,16 @@ namespace js
   value_c::~value_c()
   {}
 
+  value_c::value_c(const int value)
+    : m_pImpl(make_int_value(value))
+  { }
+  
+  value_c& value_c::operator=(const int value)
+  {
+    m_pImpl= make_int_value(value);
+    return *this;
+  }
+  
   bool value_c::is_object() const
   {
     return m_pImpl->is_object();
@@ -35,10 +46,39 @@ namespace js
 
   bool operator==(const value_c& lhs, std::nullptr_t rhs)
   {
-    return true;
+    return lhs.m_pImpl->equals(nullptr);
   }
   bool operator==(std::nullptr_t lhs, const value_c& rhs)
   {
-    return true;
+    return rhs.m_pImpl->equals(nullptr);
   }
+  bool operator!=(const value_c& lhs, std::nullptr_t rhs)
+  {
+    return !(lhs==rhs);
+  }
+  bool operator!=(std::nullptr_t lhs, const value_c& rhs)
+  {
+    return !(lhs==rhs);
+  }
+
+  bool operator==(const value_c& lhs, int rhs)
+  {
+    return lhs.m_pImpl->equals(rhs);
+  }
+  
+  bool operator==(int lhs, const value_c& rhs)
+  {
+    return rhs.m_pImpl->equals(lhs);
+  }
+  
+  bool operator!=(const value_c& lhs, int rhs)
+  {
+    return !(lhs == rhs);
+  }
+  
+  bool operator!=(int lhs, const value_c& rhs)
+  {
+    return !(lhs == rhs);
+  }
+ 
 }

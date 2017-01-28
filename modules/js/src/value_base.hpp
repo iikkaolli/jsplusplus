@@ -11,9 +11,12 @@ namespace js
     virtual ~value_base_s() = default;
 
     virtual value_base_p clone() const = 0;
+
+    virtual bool equals(std::nullptr_t) const { return false; }
+    virtual bool equals(int) const { return false; }
     
-    virtual bool is_object() const = 0;
-    virtual bool is_number() const = 0;
-    virtual bool is_string() const = 0;
+    virtual bool is_object() const { return false; }
+    virtual bool is_number() const { return false; }
+    virtual bool is_string() const { return false; }
   };
 }

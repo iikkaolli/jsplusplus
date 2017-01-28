@@ -9,9 +9,10 @@ namespace js
     ~null_value_s();
 
     value_base_p clone() const override;
-    bool is_object() const override;
-    bool is_number() const override;
-    bool is_string() const override;
+
+    bool equals(std::nullptr_t) const override { return true; }
+
+    bool is_object() const override { return true; }
   };
   
   value_base_p make_null_value();
