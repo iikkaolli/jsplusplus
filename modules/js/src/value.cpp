@@ -3,8 +3,12 @@
 
 namespace js
 {
-  value_c::value_c() : m_pImpl(new value_base_s{}){}
-  value_c::~value_c(){}
+  value_c::value_c()
+    : m_pImpl(make_null_value())
+  {}
+  
+  value_c::~value_c()
+  {}
 
   bool value_c::is_object() const
   {

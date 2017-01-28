@@ -1,7 +1,6 @@
 project(js)
 
 file(GLOB JSSources "src/*.cpp")
-
 add_library(js ${JSSources})
 
 set(JS_PUBLIC_INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/include)
