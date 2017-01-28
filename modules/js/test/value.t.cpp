@@ -24,6 +24,11 @@ TEST_CASE( "Basic construction", "[constructors]" )
   REQUIRE( ValueDouble.is_object() == false );
   REQUIRE( ValueDouble.is_number() == true );
   REQUIRE( ValueDouble.is_string() == false );
+
+  js::value_c ValueString{ "Foo" };
+  REQUIRE( ValueString.is_object() == false );
+  REQUIRE( ValueString.is_number() == false );
+  REQUIRE( ValueString.is_string() == true );
 }
 
 TEST_CASE( "Basic copy construction", "[constructors]")
@@ -56,6 +61,12 @@ TEST_CASE( "Basic copy construction", "[constructors]")
   REQUIRE( CopyOfDouble.is_string() == false );
   REQUIRE( CopyOfDouble == 20.0 );
   
+  js::value_c ValueString{ "Foo" };
+  js::value_c CopyOfString{ ValueString };
+  REQUIRE( CopyOfString.is_object() == false );
+  REQUIRE( CopyOfString.is_number() == false );
+  REQUIRE( CopyOfString.is_string() == true );
+  REQUIRE( CopyOfString == "Foo" );
 }
 
 TEST_CASE( "Basic copy assignment", "[constructors]")
@@ -79,6 +90,12 @@ TEST_CASE( "Basic copy assignment", "[constructors]")
   REQUIRE( TargetValue.is_number() == true );
   REQUIRE( TargetValue.is_string() == false );
   REQUIRE( TargetValue == 20.0 );
+
+  TargetValue = "Foo";
+  REQUIRE( TargetValue.is_object() == false );
+  REQUIRE( TargetValue.is_number() == false );
+  REQUIRE( TargetValue.is_string() == true );
+  REQUIRE( TargetValue == "Foo" );
 }
 
 TEST_CASE( "Basic comparison", "[compare]" )
@@ -106,4 +123,12 @@ TEST_CASE( "Basic comparison", "[compare]" )
   REQUIRE( 20.0 == ValueDouble );
   REQUIRE( ValueDouble != 20.1 );
   REQUIRE( 20.1 != ValueDouble );
+
+  js::value_c ValueString{ "Foo" };
+  REQUIRE( ValueString != nullptr );
+  REQUIRE( nullptr != ValueString );
+  REQUIRE( ValueString == "Foo" );
+  REQUIRE( "Foo" == ValueString );
+  REQUIRE( ValueString != "Bar" );
+  REQUIRE( "Bar" != ValueString );
 }

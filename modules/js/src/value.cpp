@@ -2,6 +2,7 @@
 #include "null_value.hpp"
 #include "int_value.hpp"
 #include "double_value.hpp"
+#include "string_value.hpp"
 
 namespace js
 {
@@ -51,6 +52,16 @@ namespace js
   value_c& value_c::operator=(const double value)
   {
     m_pImpl= make_double_value(value);
+    return *this;
+  }
+
+  value_c::value_c(const std::string& value)
+    : m_pImpl(make_string_value(value))
+  { }
+  
+  value_c& value_c::operator=(const std::string& value)
+  {
+    m_pImpl= make_string_value(value);
     return *this;
   }
 
@@ -124,6 +135,47 @@ namespace js
   }
   
   bool operator!=(double lhs, const value_c& rhs)
+  {
+    return !(lhs == rhs);
+  }
+ 
+  // Equality string
+  bool operator==(const value_c& lhs, const char* rhs)
+  {
+    return lhs.m_pImpl->equals(std::string{rhs});
+  }
+  
+  bool operator==(const char* lhs, const value_c& rhs)
+  {
+    return rhs.m_pImpl->equals(std::string{lhs});
+  }
+  
+  bool operator!=(const value_c& lhs, const char* rhs)
+  {
+    return !(lhs == std::string{rhs});
+  }
+  
+  bool operator!=(const char* lhs, const value_c& rhs)
+  {
+    return !(std::string{lhs} == rhs);
+  }
+ 
+  bool operator==(const value_c& lhs, const std::string& rhs)
+  {
+    return lhs.m_pImpl->equals(rhs);
+  }
+  
+  bool operator==(const std::string& lhs, const value_c& rhs)
+  {
+    return rhs.m_pImpl->equals(lhs);
+  }
+  
+  bool operator!=(const value_c& lhs, const std::string& rhs)
+  {
+    return !(lhs == rhs);
+  }
+  
+  bool operator!=(const std::string& lhs, const value_c& rhs)
   {
     return !(lhs == rhs);
   }
