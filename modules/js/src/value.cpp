@@ -7,6 +7,16 @@ namespace js
     : m_pImpl(make_null_value())
   {}
   
+  value_c::value_c(const value_c& other)
+    : m_pImpl(other.m_pImpl->clone())
+  {}
+  
+  value_c& value_c::operator=(const value_c& other)
+  {
+    m_pImpl = other.m_pImpl->clone();
+    return *this;
+  }
+  
   value_c::~value_c()
   {}
 

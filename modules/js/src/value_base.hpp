@@ -9,6 +9,8 @@ namespace js
   {
     value_base_s() = default;
     virtual ~value_base_s() = default;
+
+    virtual value_base_p clone() const = 0;
     
     virtual bool is_object() const = 0;
     virtual bool is_number() const = 0;

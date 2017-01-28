@@ -7,7 +7,8 @@ namespace js
   {
     null_value_s();
     ~null_value_s();
-    
+
+    value_base_p clone() const override;
     bool is_object() const override;
     bool is_number() const override;
     bool is_string() const override;

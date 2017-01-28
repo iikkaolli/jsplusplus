@@ -10,6 +10,8 @@ namespace js
     struct value_base_s;
     
     value_c();
+    value_c(const value_c&);
+    value_c& operator=(const value_c&);
     ~value_c();
     
     friend bool operator==(const value_c&, std::nullptr_t);
