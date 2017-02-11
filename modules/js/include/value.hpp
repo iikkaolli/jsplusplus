@@ -3,7 +3,7 @@
 
 namespace js
 {
-  
+
   class value_c
   {
   public:
@@ -59,4 +59,7 @@ namespace js
     std::unique_ptr<value_base_s> m_pImpl;
     
   };
+
+  static value_c EmptyValue;
+
 }
