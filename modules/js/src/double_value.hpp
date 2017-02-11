@@ -19,6 +19,8 @@ namespace js
     bool equals(const std::string&) const override;
     
     bool is_number() const override { return true; }
+
+    std::ostream& write(std::ostream&) const override; 
   };
 
   value_base_p make_double_value(const double);

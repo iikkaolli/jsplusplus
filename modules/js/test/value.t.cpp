@@ -1,5 +1,6 @@
 #include "catch.hpp"
 #include "value.hpp"
+#include <sstream>
 
 TEST_CASE( "Basic construction", "[constructors]" )
 {
@@ -243,4 +244,38 @@ TEST_CASE( "Basic string value equality comparison", "[compare]" )
   REQUIRE( (ValueString7 == ValueDouble1) == false );
   REQUIRE( (ValueString8 == ValueInt1) == false );
   REQUIRE( (ValueString8 == ValueDouble1) == false );
+}
+
+TEST_CASE( "Empty value serialize", "[serialize]" )
+{
+  std::stringstream stream;
+  stream << js::EmptyValue;
+  REQUIRE( stream.str() == "null" );
+}
+
+TEST_CASE( "Int value serialize", "[serialize]" )
+{
+  std::stringstream stream;
+  js::value_c ValueInt{10};
+
+  stream << ValueInt;
+  REQUIRE( stream.str() == "10" );
+}
+
+TEST_CASE( "Double value serialize", "[serialize]" )
+{
+  std::stringstream stream;
+  js::value_c ValueDouble{10.2};
+
+  stream << ValueDouble;
+  REQUIRE( stream.str() == "10.2" );
+}
+
+TEST_CASE( "String value serialize", "[serialize]" )
+{
+  std::stringstream stream;
+  js::value_c ValueString{"abc"};
+
+  stream << ValueString;
+  REQUIRE( stream.str() == R"("abc")" );
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <ostream>
 
 namespace js
 {
@@ -57,7 +58,9 @@ namespace js
     friend bool operator==(const std::string&, const value_c&);
     friend bool operator!=(const value_c&, const std::string&);
     friend bool operator!=(const std::string&, const value_c&);
-   
+
+    friend std::ostream& operator<<(std::ostream&, const js::value_c&);
+
   private:
     std::unique_ptr<value_base_s> m_pImpl;
     
@@ -66,3 +69,4 @@ namespace js
   static value_c EmptyValue;
 
 }
+

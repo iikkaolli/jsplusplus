@@ -3,7 +3,6 @@
 #include "int_value.hpp"
 #include "double_value.hpp"
 #include "string_value.hpp"
-#include "value_comparator.hpp"
 
 namespace js
 {
@@ -83,19 +82,6 @@ namespace js
   // Equality value_c
   bool operator==(const value_c& lhs, const value_c& rhs)
   {
-    // null    null   -> true
-    // null    *      -> false
-    // int     null   -> false
-    // int     int    -> int compare
-    // int     double -> double compare
-    // int     string -> (stoi and int compare) or string compare
-    // double  null   -> false
-    // double  int    -> double compare
-    // double  double -> double compare
-    // double  string -> (stoi and int compare) or string compare
-    // string  double -> (stod and double compare) or string compare
-    // string  string -> string compare
-
     return lhs.m_pImpl->equals(*rhs.m_pImpl);
   }
   
@@ -205,4 +191,9 @@ namespace js
     return !(lhs == rhs);
   }
  
+  std::ostream& operator<<(std::ostream& stream, const js::value_c& value)
+  {
+    return value.m_pImpl->write(stream);
+  }
 }
+

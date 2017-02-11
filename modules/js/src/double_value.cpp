@@ -44,6 +44,12 @@ namespace js
     return false;
   }
 
+  std::ostream& double_value_s::write(std::ostream& stream) const
+  {
+    stream << m_value;
+    return stream;
+  }
+
   value_base_p make_double_value(const double value)
   {
     return value_base_p{new double_value_s{value}};

@@ -1,5 +1,6 @@
 #pragma once
 #include "value.hpp"
+#include <ostream>
 
 namespace js
 {
@@ -21,5 +22,7 @@ namespace js
     virtual bool is_object() const { return false; }
     virtual bool is_number() const { return false; }
     virtual bool is_string() const { return false; }
+
+    virtual std::ostream& write(std::ostream&) const = 0; 
   };
 }

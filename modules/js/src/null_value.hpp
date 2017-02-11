@@ -14,6 +14,9 @@ namespace js
     bool equals(std::nullptr_t) const override { return true; }
 
     bool is_object() const override { return true; }
+
+    std::ostream& write(std::ostream&) const override; 
+
   };
   
   value_base_p make_null_value();
