@@ -10,6 +10,7 @@ namespace js
 
     value_base_p clone() const override;
 
+    bool equals(const value_base_s&) const override;
     bool equals(std::nullptr_t) const override { return true; }
 
     bool is_object() const override { return true; }

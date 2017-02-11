@@ -17,7 +17,33 @@ namespace js
   {
     return value_base_p{new int_value_s{m_value}};
   }
+
+  bool int_value_s::equals(const value_base_s& rhs) const
+  {
+    return rhs.equals(m_value);
+  }
   
+  bool int_value_s::equals(int value) const
+  {
+    return m_value == value;
+  }
+  
+  bool int_value_s::equals(double value) const
+  {
+    return m_value == value;
+  }
+  
+  bool int_value_s::equals(const std::string& value) const
+  {
+    try {
+      size_t len = 0;
+      return ((std::stoi(value, &len) == m_value) &&
+	      (value.length() == len));
+    } catch(...) {}
+
+    return false;
+  }
+
   value_base_p make_int_value(const int value)
   {
     return value_base_p{new int_value_s{value}};

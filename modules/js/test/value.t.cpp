@@ -130,3 +130,117 @@ TEST_CASE( "Basic comparison", "[compare]" )
   REQUIRE( ValueString != "Bar" );
   REQUIRE( "Bar" != ValueString );
 }
+
+TEST_CASE( "Basic empty value equality comparison", "[compare]" )
+{
+  js::value_c ValueInt1{10};
+  js::value_c ValueInt2{10};
+  js::value_c ValueInt3{20};
+  js::value_c ValueDouble1{10.0};
+  js::value_c ValueDouble2{10.0};
+  js::value_c ValueDouble3{20.0};
+  js::value_c ValueString1{"10"};
+  js::value_c ValueString2{"10"};
+  js::value_c ValueString3{"20"};
+  js::value_c ValueString4{"10.0"};
+  js::value_c ValueString5{"10.1"};
+
+  REQUIRE( (js::EmptyValue == js::EmptyValue) == true );
+  REQUIRE( (js::EmptyValue == ValueInt1) == false );
+  REQUIRE( (js::EmptyValue == ValueDouble1) == false );
+  REQUIRE( (js::EmptyValue == ValueString1) == false );
+}
+
+TEST_CASE( "Basic int value equality comparison", "[compare]" )
+{
+  js::value_c ValueInt1{10};
+  js::value_c ValueInt2{10};
+  js::value_c ValueInt3{20};
+  js::value_c ValueDouble1{10.0};
+  js::value_c ValueDouble2{10.0};
+  js::value_c ValueDouble3{20.0};
+  js::value_c ValueString1{"10"};
+  js::value_c ValueString2{"10"};
+  js::value_c ValueString3{"20"};
+  js::value_c ValueString4{"10.0"};
+  js::value_c ValueString5{"10.1"};
+  js::value_c ValueString6{"abc"};
+  js::value_c ValueString7{"10abc"};
+  js::value_c ValueString8{"abc10"};
+
+  REQUIRE( (ValueInt1 == js::EmptyValue) == false );
+  REQUIRE( (ValueInt1 == ValueInt2) == true );
+  REQUIRE( (ValueInt1 == ValueInt3) == false );
+  REQUIRE( (ValueInt1 == ValueDouble2) == true );
+  REQUIRE( (ValueInt1 == ValueDouble3) == false );
+  REQUIRE( (ValueInt1 == ValueString2) == true );
+  REQUIRE( (ValueInt1 == ValueString3) == false );
+  REQUIRE( (ValueInt1 == ValueString4) == false );
+  REQUIRE( (ValueInt1 == ValueString5) == false );
+  REQUIRE( (ValueInt1 == ValueString6) == false );
+  REQUIRE( (ValueInt1 == ValueString7) == false );
+  REQUIRE( (ValueInt1 == ValueString8) == false );
+}
+
+TEST_CASE( "Basic double value equality comparison", "[compare]" )
+{
+  js::value_c ValueInt1{10};
+  js::value_c ValueInt2{10};
+  js::value_c ValueInt3{20};
+  js::value_c ValueDouble1{10.0};
+  js::value_c ValueDouble2{10.0};
+  js::value_c ValueDouble3{20.0};
+  js::value_c ValueString1{"10"};
+  js::value_c ValueString2{"10"};
+  js::value_c ValueString3{"20"};
+  js::value_c ValueString4{"10.0"};
+  js::value_c ValueString5{"10.1"};
+  js::value_c ValueString6{"abc"};
+  js::value_c ValueString7{"10abc"};
+  js::value_c ValueString8{"abc10"};
+
+  REQUIRE( (ValueDouble1 == js::EmptyValue) == false );
+  REQUIRE( (ValueDouble1 == ValueInt2) == true );
+  REQUIRE( (ValueDouble1 == ValueInt3) == false );
+  REQUIRE( (ValueDouble1 == ValueDouble2) == true );
+  REQUIRE( (ValueDouble1 == ValueDouble3) == false );
+  REQUIRE( (ValueDouble1 == ValueString2) == true );
+  REQUIRE( (ValueDouble1 == ValueString3) == false );
+  REQUIRE( (ValueDouble1 == ValueString4) == true );
+  REQUIRE( (ValueDouble1 == ValueString5) == false );
+  REQUIRE( (ValueDouble1 == ValueString6) == false );
+  REQUIRE( (ValueDouble1 == ValueString7) == false );
+  REQUIRE( (ValueDouble1 == ValueString8) == false );
+}
+ 
+TEST_CASE( "Basic string value equality comparison", "[compare]" )
+{
+  js::value_c ValueInt1{10};
+  js::value_c ValueInt2{10};
+  js::value_c ValueInt3{20};
+  js::value_c ValueDouble1{10.0};
+  js::value_c ValueDouble2{10.0};
+  js::value_c ValueDouble3{20.0};
+  js::value_c ValueString1{"10"};
+  js::value_c ValueString2{"10"};
+  js::value_c ValueString3{"20"};
+  js::value_c ValueString4{"10.0"};
+  js::value_c ValueString5{"10.1"};
+  js::value_c ValueString6{"abc"};
+  js::value_c ValueString7{"10abc"};
+  js::value_c ValueString8{"abc10"};
+
+  REQUIRE( (ValueString1 == js::EmptyValue) == false );
+  REQUIRE( (ValueString1 == ValueInt2) == true );
+  REQUIRE( (ValueString1 == ValueInt3) == false );
+  REQUIRE( (ValueString1 == ValueDouble2) == true );
+  REQUIRE( (ValueString1 == ValueDouble3) == false );
+  REQUIRE( (ValueString1 == ValueString2) == true );
+  REQUIRE( (ValueString1 == ValueString3) == false );
+  REQUIRE( (ValueString6 == ValueInt1) == false );
+  REQUIRE( (ValueString6 == ValueDouble1) == false );
+  REQUIRE( (ValueString7 == ValueInt1) == false );
+  REQUIRE( (ValueString7 == ValueDouble1) == false );
+  REQUIRE( (ValueString8 == ValueInt1) == false );
+  REQUIRE( (ValueString8 == ValueDouble1) == false );
+}

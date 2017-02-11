@@ -30,6 +30,9 @@ namespace js
     bool is_number() const;
     bool is_string() const;
 
+    friend bool operator==(const value_c&, const value_c&);
+    friend bool operator!=(const value_c&, const value_c&);
+
     friend bool operator==(const value_c&, std::nullptr_t);
     friend bool operator==(std::nullptr_t, const value_c&);
     friend bool operator!=(const value_c&, std::nullptr_t);

@@ -13,7 +13,11 @@ namespace js
 
     value_base_p clone() const override;
 
-    bool equals(double value) const override { return m_value == value; }
+    bool equals(const value_base_s&) const override;
+    bool equals(int value) const override;
+    bool equals(double value) const override;
+    bool equals(const std::string&) const override;
+    
     bool is_number() const override { return true; }
   };
 
