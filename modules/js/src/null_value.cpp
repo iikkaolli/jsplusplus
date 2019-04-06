@@ -15,7 +15,7 @@ namespace js
 
   bool null_value_s::equals(const value_base_s& rhs) const
   {
-    return rhs.is_object();
+    return !rhs.is_object() && !rhs.is_number() && !rhs.is_string();
   }
 
   std::ostream& null_value_s::write(std::ostream& stream) const

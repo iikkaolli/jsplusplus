@@ -5,12 +5,12 @@
 TEST_CASE( "Basic construction", "[constructors]" )
 {
   js::value_c ValueDefault;
-  REQUIRE( ValueDefault.is_object() == true );
+  REQUIRE( ValueDefault.is_object() == false );
   REQUIRE( ValueDefault.is_number() == false );
   REQUIRE( ValueDefault.is_string() == false );
 
   js::value_c ValueNull{ nullptr }; 
-  REQUIRE( ValueNull.is_object() == true );
+  REQUIRE( ValueNull.is_object() == false );
   REQUIRE( ValueNull.is_number() == false );
   REQUIRE( ValueNull.is_string() == false );
 
@@ -34,14 +34,14 @@ TEST_CASE( "Basic copy construction", "[constructors]")
 {
   js::value_c ValueDefault;
   js::value_c CopyOfDefault{ ValueDefault };  
-  REQUIRE( CopyOfDefault.is_object() == true );
+  REQUIRE( CopyOfDefault.is_object() == false );
   REQUIRE( CopyOfDefault.is_number() == false );
   REQUIRE( CopyOfDefault.is_string() == false );
   REQUIRE( CopyOfDefault == nullptr );
 
   js::value_c ValueNull{ nullptr };
   js::value_c CopyOfNull{ ValueNull };  
-  REQUIRE( CopyOfNull.is_object() == true );
+  REQUIRE( CopyOfNull.is_object() == false );
   REQUIRE( CopyOfNull.is_number() == false );
   REQUIRE( CopyOfNull.is_string() == false );
   REQUIRE( CopyOfNull == nullptr );
@@ -73,7 +73,7 @@ TEST_CASE( "Basic copy assignment", "[constructors]")
   js::value_c TargetValue;
 
   TargetValue = nullptr;
-  REQUIRE( TargetValue.is_object() == true );
+  REQUIRE( TargetValue.is_object() == false );
   REQUIRE( TargetValue.is_number() == false );
   REQUIRE( TargetValue.is_string() == false );
   REQUIRE( TargetValue == nullptr );
@@ -278,4 +278,9 @@ TEST_CASE( "String value serialize", "[serialize]" )
 
   stream << ValueString;
   REQUIRE( stream.str() == R"("abc")" );
+}
+
+TEST_CASE ( "Empty value is not an object", "[type]") 
+{
+  REQUIRE( js::EmptyValue.is_object() == false );
 }
