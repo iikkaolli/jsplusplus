@@ -5,6 +5,11 @@ namespace js
   object_c::object_c()
   {}
   
+  object_c::object_c(std::initializer_list<keyValueType> initList)
+  {
+    m_properties.insert(initList.begin(), initList.end());
+  }
+
   object_c::~object_c()
   {}
 
