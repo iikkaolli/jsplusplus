@@ -13,10 +13,12 @@ namespace js
     object_c();
     ~object_c();
 
-    const value_c& operator[](const std::string&);
-    
+    const value_c& operator[](const std::string&) const;
+    value_c& operator[](const std::string&);
+
     bool has_property(const std::string&);
     void add_property(const std::string&, const value_c&);
+    void add_property(std::pair<std::string, value_c>);
 
   };
 }

@@ -65,7 +65,6 @@ namespace js
     return *this;
   }
 
-  // 
   bool value_c::is_object() const
   {
     return m_pImpl->is_object();
