@@ -55,10 +55,20 @@ namespace js
     return *this;
   }
 
+  value_c::value_c(const char *pValue)
+    : m_pImpl(make_string_value(pValue))
+  { }
+  
   value_c::value_c(const std::string& value)
     : m_pImpl(make_string_value(value))
   { }
   
+  value_c& value_c::operator=(const char *pValue)
+  {
+    m_pImpl= make_string_value(pValue);
+    return *this;
+  }
+
   value_c& value_c::operator=(const std::string& value)
   {
     m_pImpl= make_string_value(value);

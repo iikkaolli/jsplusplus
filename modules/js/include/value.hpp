@@ -24,6 +24,9 @@ namespace js
     value_c(const double);
     value_c& operator=(const double);
 
+    value_c(const char*);
+    value_c& operator=(const char*);
+    
     value_c(const std::string&);
     value_c& operator=(const std::string&);
 
